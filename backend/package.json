@@ -1,0 +1,17 @@
+{
+  "name": "land-registry-backend",
+  "version": "1.0.0",
+  "description": "Land Registry Blockchain Backend - Fabric + Supabase",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "enroll": "node scripts/enrollUser.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "fabric-ca-client": "^2.5.0",
+    "fabric-network": "^2.5.0",
+    "@supabase/supabase-js": "^2.39.0"
+  }
+}
