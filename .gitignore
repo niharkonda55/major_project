@@ -1,0 +1,83 @@
+########################################
+# 🔐 Hyperledger Fabric - Generated Artifacts
+########################################
+
+# Fabric binaries (never commit)
+network/bin/
+# fabric-samples/bin/
+
+# Generated crypto material
+network/land-registry-network/organizations/peerOrganizations/
+network/land-registry-network/organizations/ordererOrganizations/
+network/land-registry-network/organizations/fabric-ca/org1/
+network/land-registry-network/organizations/fabric-ca/org2/
+network/land-registry-network/organizations/fabric-ca/ordererOrg/
+
+# Channel artifacts & genesis blocks
+network/land-registry-network/channel-artifacts/
+network/land-registry-network/system-genesis-block/
+
+# Fabric CA databases
+*.db
+
+########################################
+# 🐳 Docker
+########################################
+
+*.tar.gz
+*.log
+docker-compose.override.yml
+
+########################################
+# 🧾 Logs
+########################################
+
+*.log
+log.txt
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+########################################
+# 🟢 Node.js (Backend + Chaincode)
+########################################
+
+node_modules/
+package-lock.json
+.env
+.env.local
+.env.development
+.env.production
+
+########################################
+# 🪟 Windows Metadata Files
+########################################
+
+*Zone.Identifier*
+Thumbs.db
+Desktop.ini
+
+########################################
+# 🧪 Temporary / OS Files
+########################################
+
+.DS_Store
+*.swp
+*.swo
+*.tmp
+*.bak
+
+########################################
+# 🧠 IDE / Editor
+########################################
+
+.vscode/
+.idea/
+*.iml
+
+########################################
+# 📊 CouchDB (if any local data stored)
+########################################
+
+*.couch
+*.sqlite
