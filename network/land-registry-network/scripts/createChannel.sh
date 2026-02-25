@@ -29,22 +29,35 @@ if [ ! -d "${TEST_NETWORK_HOME}/channel-artifacts" ]; then
 fi
 
 createChannelGenesisBlock() {
-  setGlobals 1
-	which configtxgen
-	if [ "$?" -ne 0 ]; then
-		fatalln "configtxgen tool not found."
-	fi
-	local bft_true=$1
-	set -x
 
-	if [ $bft_true -eq 1 ]; then
-		configtxgen -profile ChannelUsingBFT -outputBlock "${TEST_NETWORK_HOME}/channel-artifacts/${CHANNEL_NAME}.block" -channelID $CHANNEL_NAME
-	else
-		configtxgen -profile ChannelUsingRaft -outputBlock "${TEST_NETWORK_HOME}/channel-artifacts/${CHANNEL_NAME}.block" -channelID $CHANNEL_NAME
-	fi
-	res=$?
-	{ set +x; } 2>/dev/null
+  # 🔹 Switch to configtx folder for configtxgen
+  export FABRIC_CFG_PATH=${TEST_NETWORK_HOME}/configtx
+
+  setGlobals 1
+  which configtxgen
+  if [ "$?" -ne 0 ]; then
+    fatalln "configtxgen tool not found."
+  fi
+
+  local bft_true=$1
+  set -x
+
+  if [ $bft_true -eq 1 ]; then
+    configtxgen -profile ChannelUsingBFT \
+      -outputBlock "${TEST_NETWORK_HOME}/channel-artifacts/${CHANNEL_NAME}.block" \
+      -channelID $CHANNEL_NAME
+  else
+    configtxgen -profile ChannelUsingRaft \
+      -outputBlock "${TEST_NETWORK_HOME}/channel-artifacts/${CHANNEL_NAME}.block" \
+      -channelID $CHANNEL_NAME
+  fi
+
+  res=$?
+  { set +x; } 2>/dev/null
   verifyResult $res "Failed to generate channel configuration transaction..."
+
+  # 🔹 Switch BACK to peer config (core.yaml)
+  export FABRIC_CFG_PATH=${TEST_NETWORK_HOME}/../config
 }
 
 createChannel() {

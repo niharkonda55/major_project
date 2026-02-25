@@ -28,7 +28,7 @@ else
   FABRIC_BIN_PATH="${ROOTDIR}/../bin"
 fi
 export PATH="${FABRIC_BIN_PATH}:${PATH}"
-export FABRIC_CFG_PATH="${ROOTDIR}/configtx"
+export FABRIC_CFG_PATH=${PWD}/../config
 export FABRIC_BIN_PATH
 export VERBOSE=false
 
