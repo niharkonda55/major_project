@@ -11,9 +11,9 @@ let gateway;
 
 async function getContract(identityLabel, org = 'revenuedept') {
   const base = path.resolve(__dirname, '../..');
-  const ccpPath = org === 'revenuedept'
-    ? path.resolve(process.env.CONNECTION_PROFILE_REVENUEDEPT || path.join(base, 'network/land-registry-network/organizations/peerOrganizations/revenuedept.landregistry.com/connection-revenuedept.json'))
-    : path.resolve(process.env.CONNECTION_PROFILE_REGIONALOFFICE || path.join(base, 'network/land-registry-network/organizations/peerOrganizations/regionaloffice.landregistry.com/connection-regionaloffice.json'));
+  const orgDomain = org === 'revenuedept' ? 'org1.example.com' : 'org2.example.com';
+  const connFileName = org === 'revenuedept' ? 'connection-org1.json' : 'connection-org2.json';
+  const ccpPath = path.resolve(process.env.CONNECTION_PROFILE || path.join(base, `network/land-registry-network/organizations/peerOrganizations/${orgDomain}/${connFileName}`));
 
   const ccp = JSON.parse(fs.readFileSync(ccpPath, 'utf8'));
   const walletPath = path.resolve(process.env.WALLET_PATH || path.join(base, 'backend/wallet'));
@@ -28,7 +28,7 @@ async function getContract(identityLabel, org = 'revenuedept') {
   await gateway.connect(ccp, {
     wallet,
     identity: identityLabel,
-    discovery: { enabled: true, asLocalhost: true }
+    discovery: { enabled: false }
   });
 
   const network = await gateway.getNetwork(process.env.CHANNEL_NAME || 'landregistrychannel');

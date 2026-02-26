@@ -15,7 +15,7 @@ async function main() {
   const wallet = await Wallets.newFileSystemWallet(walletPath);
 
   const networkRoot = path.join(base, 'network/land-registry-network');
-  const adminPath = path.join(networkRoot, 'organizations/peerOrganizations/revenuedept.landregistry.com/users/Admin@revenuedept.landregistry.com/msp');
+  const adminPath = path.join(networkRoot, 'organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp');
 
   if (!fs.existsSync(adminPath)) {
     console.error('Admin MSP not found. Run network.sh up -ca first.');
@@ -35,7 +35,7 @@ async function main() {
 
   const identity = {
     credentials: { certificate, privateKey },
-    mspId: 'RevenueDeptMSP',
+    mspId: 'Org1MSP',
     type: 'X.509'
   };
 
